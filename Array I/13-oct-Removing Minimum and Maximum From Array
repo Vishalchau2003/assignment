@@ -1,0 +1,36 @@
+2091. Removing Minimum and Maximum From Array
+
+
+//solution
+
+class Solution {
+public:
+    int minimumDeletions(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 1) return 1;
+
+        int maxi = INT_MIN, mini = INT_MAX;
+        int maxind = 0, minind = 0;
+
+        for(int i = 0; i < n; i++) {
+            if(nums[i] > maxi) {
+                maxi = nums[i];
+                maxind = i;
+            }
+            if(nums[i] < mini) {
+                mini = nums[i];
+                minind = i;
+            }
+        }
+
+        // keep min-index first
+        if(minind > maxind) swap(minind, maxind);
+
+        // 3 choices:
+        int d1 = maxind + 1;  // remove from left so take maxind because if we go from left then we have to delete right so maxind+1
+        int d2 = n - minind;            // remove from right
+        int d3 = (minind + 1) + (n - maxind); // left for min + right for max
+
+        return min({d1, d2, d3});
+    }
+};
