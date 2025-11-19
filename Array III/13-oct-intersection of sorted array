@@ -30,3 +30,29 @@ public:
         return ans;
     }
 };
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        int n=nums1.size();
+        int m=nums2.size();
+        unordered_set<int>s(nums1.begin(),nums1.end());
+        unordered_set<int>sol;
+        for(int i=0;i<m;i++){
+            if(s.find(nums2[i])!=s.end()){
+               sol.insert(nums2[i]);
+            }
+        }
+        vector<int>ans(sol.begin(),sol.end());
+        return ans;
+    }
+};
